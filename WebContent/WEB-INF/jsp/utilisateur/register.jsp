@@ -14,8 +14,9 @@
 	<jsp:include page="../menuNavbar.jsp">
 	<jsp:param name="monCul" value=" "/>
     </jsp:include>
+    
     <div class="d-flex justify-content-center align-items-center h-100 pt-5">
-	  	<form class="w-50 h-">
+	  	<form  class="w-50 h-" method="POST">
 	  	
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
@@ -71,13 +72,14 @@
 		      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
 		    </div>
 		  </div>
+		  
 		<div class="form-row justify-content-around">
 		  <button type="submit" class="btn btn-primary ">Crée</button>
 		  <button type="submit" class="btn btn-primary">Annuler</button>
 		</div>
+		
 		</form>
     </div>
 
-    
 </body>
 </html>

@@ -15,7 +15,7 @@ import fr.eni.ProjetEncheres.BLL.UserManager;
 /**
  * Servlet implementation class ConnexionServlet
  */
-@WebServlet("/ConnexionServlet")
+@WebServlet("/Connexion")
 public class ConnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,7 @@ public class ConnexionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/seConnecter.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/utilisateur/seConnecter.jsp");
 		rd.forward(request, response);
 	}
 
