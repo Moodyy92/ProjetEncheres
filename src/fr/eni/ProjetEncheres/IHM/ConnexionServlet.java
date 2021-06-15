@@ -23,7 +23,7 @@ public class ConnexionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/SeConnecter.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/seConnecter.jsp");
 		rd.forward(request, response);
 	}
 
@@ -42,7 +42,7 @@ public class ConnexionServlet extends HttpServlet {
 			response.sendRedirect("IndexServlet");
 		} else {
 			request.setAttribute("failedConnection", "Le mot de passe ou le pseudo est incorrect");
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/SeConnecter.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/seConnecter.jsp");
 			rd.forward(request, response);
 		}
 		
