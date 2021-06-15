@@ -4,6 +4,12 @@ import java.util.List;
 
 public class Categorie {
 	
+	@Override
+	public String toString() {
+		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + ", categorieArticle="
+				+ categorieArticle + "]";
+	}
+
 	private int noCategorie;
 	private String libelle;
 	
