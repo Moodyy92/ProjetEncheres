@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+ <jsp:include page="entete.jsp">
+            <jsp:param name="maVar" value="Liste des encheres"/>
+  </jsp:include>
 </body>
 </html>
