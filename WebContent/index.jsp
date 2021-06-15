@@ -19,6 +19,7 @@
 	<jsp:param name="monCul" value=" "/>
     </jsp:include>
     
+    
     <jsp:include page="WEB-INF/jsp/entete.jsp">
  	<jsp:param name="maVar" value="Liste des encheres"/>
     </jsp:include>
