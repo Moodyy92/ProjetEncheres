@@ -31,3 +31,4 @@ hs_err_pid*
 
 /bin/
 /.metadata/
+/WebContent/META-INF/*
