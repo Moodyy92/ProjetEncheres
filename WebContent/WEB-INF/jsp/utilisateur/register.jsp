@@ -17,51 +17,51 @@
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputEmail4">Pseudo</label>
-		      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+		      <input type="text" class="form-control" id="inputEmail4" placeholder="Email">
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">Nom</label>
-		      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+		      <input type="text" class="form-control" id="inputPassword4" placeholder="Password">
 		    </div>
 		  </div>
 		  
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputEmail4">Prénom</label>
-		      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+		      <input type="text" class="form-control" id="inputEmail4" placeholder="Email">
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">Email</label>
-		      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+		      <input type="email" class="form-control" id="inputPassword4" placeholder="Password">
 		    </div>
 		  </div>
 		  
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputEmail4">Téléphone</label>
-		      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+		      <input type="text" class="form-control" id="inputEmail4" placeholder="Email">
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">Rue</label>
-		      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+		      <input type="text" class="form-control" id="inputPassword4" placeholder="Password">
 		    </div>
 		  </div>
 		  
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputEmail4">Code postal</label>
-		      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+		      <input type="number" class="form-control" id="inputEmail4" placeholder="Email">
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">Ville</label>
-		      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+		      <input type="text" class="form-control" id="inputPassword4" placeholder="Password">
 		    </div>
 		  </div>
 		  
 		    <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="inputEmail4">Mot de passe</label>
-		      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+		      <input type="password" class="form-control" id="inputEmail4" placeholder="Email">
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">Confirmation</label>
@@ -70,7 +70,7 @@
 		  </div>
 		  
 		<div class="form-row justify-content-around">
-		  <button type="submit" class="btn btn-primary ">Crée</button>
+		  <button type="submit" class="btn btn-primary">Créer</button>
 		  <button type="submit" class="btn btn-primary">Annuler</button>
 		</div>
 		
