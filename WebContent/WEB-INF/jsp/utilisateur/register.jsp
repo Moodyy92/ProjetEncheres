@@ -8,7 +8,7 @@
 	</jsp:include>
 </head>
 <body >
-	<jsp:include page="../menuNavbar.jsp">
+	<jsp:include page="../parts/menuNavbar.jsp">	
 		<jsp:param name="monCul" value=" "/>
     </jsp:include>
     
