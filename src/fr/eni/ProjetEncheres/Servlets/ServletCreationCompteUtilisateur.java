@@ -1,6 +1,8 @@
 package fr.eni.ProjetEncheres.Servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +23,13 @@ import fr.eni.ProjetEncheres.DAL.UtilisateurDAO;
 public class ServletCreationCompteUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	public static final String VUE          = "/WEB-INF/inscription.jsp";
+    public static final String CHAMP_EMAIL  = "email";
+    public static final String CHAMP_PASS   = "motdepasse";
+    public static final String CHAMP_CONF   = "confirmation";
+    public static final String CHAMP_NOM    = "nom";
+    public static final String ATT_ERREURS  = "erreurs";
+    public static final String ATT_RESULTAT = "resultat";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,8 +53,13 @@ public class ServletCreationCompteUtilisateur extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		
+				String resultat;
+		        Map<String, String> erreurs = new HashMap<String, String>();
 		/****************************Recuperation des Parametres des champs************************************/
-				String pseudo = request.getParameter("pseudo");
+				
+		        String pseudo = request.getParameter("pseudo");
 				String nom = request.getParameter("nom");
 				String prenom = request.getParameter("prenom");
 				String email = request.getParameter("email");
@@ -72,7 +86,7 @@ public class ServletCreationCompteUtilisateur extends HttpServlet {
 
 		        /* Validation des champs mot de passe et confirmation. */
 		        try {
-		            validationMotsDePasse( motDePasse, confirmation );
+		            validationMotsDePasse( mdp, confirmation );
 		        } catch ( Exception e ) {
 		            erreurs.put( CHAMP_PASS, e.getMessage() );
 		        }
@@ -113,6 +127,22 @@ public class ServletCreationCompteUtilisateur extends HttpServlet {
 		
 		
 	}
+
+	private void validationNom(String nom) throws Exception 
+	{
+		if ( nom != null && nom.trim().length() < 3 ) {
+	        throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
+			}
+	}
+	private void validationMotsDePasse(String mdp, String confirmation) throws Exception 
+	{
+		if ( mdp != confirmation ) {
+	        throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
+			}
+		if ( mdp != null && mdp.trim().length() < 8 ) {
+	        throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
+			}
+	} 
 
 	private void validationEmail(String email) {
 		// TODO Auto-generated method stub
