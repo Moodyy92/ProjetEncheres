@@ -8,11 +8,11 @@
 	</jsp:include>
 </head>
 <body>
-	<jsp:include page="WEB-INF/jsp/menuNavbar.jsp">
+	<jsp:include page="WEB-INF/jsp/parts/menuNavbar.jsp">
 		<jsp:param name="monCul" value=" "/>
     </jsp:include>
     
-    <jsp:include page="WEB-INF/jsp/entete.jsp">
+    <jsp:include page="WEB-INF/jsp/parts/entete.jsp">
  		<jsp:param name="maVar" value="Liste des encheres"/>
     </jsp:include>
 </body>
