@@ -33,7 +33,8 @@ public class ServletCreationCompteUtilisateur extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		/*************************Redirection vers la JSP********************************/
 		RequestDispatcher rd = request.getRequestDispatcher("/creationDeCompteUtilisateur.jsp");
 		rd.forward(request, response);
 	}
@@ -43,41 +44,78 @@ public class ServletCreationCompteUtilisateur extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*Utilisateur user = new Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-				String rue, String codePostal, String ville, String motDePasse, int credit );*/
-		
-		
-		String pseudo = request.getParameter("pseudo");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-		String email = request.getParameter("email");
-		String telephone = request.getParameter("telephone");
-		String rue = request.getParameter("rue");
-		String cp = request.getParameter("cp");
-		String ville = request.getParameter("ville");
-		String mdp = request.getParameter("mdp");
-		String confirmation = request.getParameter("confirmation");
-		int credit = 0;
-		Utilisateur user = new Utilisateur(pseudo,nom,prenom,email,telephone,rue,cp,ville,mdp,credit);
-		
-		/*if (confirmation==mdp) 
-		{*/
-			UtilisateurManager userDAO = new UtilisateurManager(); 
-			try {
+		/****************************Recuperation des Parametres des champs************************************/
+				String pseudo = request.getParameter("pseudo");
+				String nom = request.getParameter("nom");
+				String prenom = request.getParameter("prenom");
+				String email = request.getParameter("email");
+				String telephone = request.getParameter("telephone");
+				String rue = request.getParameter("rue");
+				String cp = request.getParameter("cp");
+				String ville = request.getParameter("ville");
+				String mdp = request.getParameter("mdp");
+				String confirmation = request.getParameter("confirmation");
+				System.out.println(confirmation);
+				int credit = 0;
+				
+		/****************************Creation de l'utilisateur************************************/
+
+				Utilisateur user = new Utilisateur(pseudo,nom,prenom,email,telephone,rue,cp,ville,mdp,credit);
+				
+
+		        /* Validation du champ email. */
+		        try {
+		            validationEmail( email );
+		        } catch ( Exception e ) {
+		            erreurs.put( CHAMP_EMAIL, e.getMessage() );
+		        }
+
+		        /* Validation des champs mot de passe et confirmation. */
+		        try {
+		            validationMotsDePasse( motDePasse, confirmation );
+		        } catch ( Exception e ) {
+		            erreurs.put( CHAMP_PASS, e.getMessage() );
+		        }
+
+		        /* Validation du champ nom. */
+		        try {
+		            validationNom( nom );
+		        } catch ( Exception e ) {
+		            erreurs.put( CHAMP_NOM, e.getMessage() );
+		        }
+
+		        /* Initialisation du résultat global de la validation. */
+		        if ( erreurs.isEmpty() ) {
+		            resultat = "Succès de l'inscription.";
+		        } else {
+		            resultat = "Échec de l'inscription.";
+		        }
+				
+			try 
+			{
+				UtilisateurManager userDAO = new UtilisateurManager(); 
 				userDAO.creerCompte(user);
-			} catch (BusinessException e) {
+				
+		/*********************Redirection vers l'accueille si userDAO.creerCompte(user) n'est pas catch***************/
+				
+				//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Acceuille.jsp");
+				//rd.forward(request, response);
+				
+			} catch (BusinessException e)
+			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(user.toString());
-		//}
 			
-		/*else 
-		{
-			// erreur mdp et confirmation different
-		}*/
+			System.out.println(user.toString());
 		
 		
+		
+		
+	}
+
+	private void validationEmail(String email) {
+		// TODO Auto-generated method stub
 		
 	}
 }

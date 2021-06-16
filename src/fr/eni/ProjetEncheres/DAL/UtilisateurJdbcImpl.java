@@ -51,37 +51,37 @@ public class UtilisateurJdbcImpl implements UtilisateurDAO {
 		
 		
 				pstmt = cnx.prepareStatement(INSERT_COMPTE_UTILISATEUR, PreparedStatement.RETURN_GENERATED_KEYS);
-				pstmt.setString(1, user.getPseudo());
-				pstmt.setString(2, user.getNom());
-				pstmt.setString(3, user.getPrenom());
-				pstmt.setString(4, user.getEmail());
-				pstmt.setString(5, user.getTelephone());
-				pstmt.setString(6, user.getRue());
-				pstmt.setString(7, user.getCodePostal());
-				pstmt.setString(8, user.getVille());
-				pstmt.setString(9, user.getMotDePasse());
-				pstmt.setInt(10, user.getCredit());
-				pstmt.setBoolean(11, false);
+					pstmt.setString(1, user.getPseudo());
+					pstmt.setString(2, user.getNom());
+					pstmt.setString(3, user.getPrenom());
+					pstmt.setString(4, user.getEmail());
+					pstmt.setString(5, user.getTelephone());
+					pstmt.setString(6, user.getRue());
+					pstmt.setString(7, user.getCodePostal());
+					pstmt.setString(8, user.getVille());
+					pstmt.setString(9, user.getMotDePasse());
+					pstmt.setInt(10, user.getCredit());
+					pstmt.setBoolean(11, false);
 		
-				pstmt.executeUpdate();
-				rs = pstmt.getGeneratedKeys();
+					pstmt.executeUpdate();
+					rs = pstmt.getGeneratedKeys();
+				
 				if(rs.next())
-				{
-					user.setNoUtilisateur(rs.getInt(1));
-				}
+					{
+						user.setNoUtilisateur(rs.getInt(1));
+					}
 					
-				pstmt.executeUpdate();
-				rs = pstmt.getGeneratedKeys();
-				cnx.commit();
-				rs.close();
-				pstmt.close();
+				
+			   cnx.commit();
+			   rs.close();
+			   pstmt.close();
 			}
 			catch(Exception e)
 			{
 				e.printStackTrace();
 				cnx.rollback();
 				throw e;
-				}
+			}
 		}
 		catch(Exception e)
 		{
@@ -89,7 +89,7 @@ public class UtilisateurJdbcImpl implements UtilisateurDAO {
 			BusinessException businessException = new BusinessException();
 			throw businessException;
 		}
-		}
+	}
 			
 	
 	}
