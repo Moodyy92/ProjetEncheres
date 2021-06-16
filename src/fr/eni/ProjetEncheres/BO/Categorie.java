@@ -17,10 +17,19 @@ public class Categorie {
 	
 	
 	public Categorie(int noCategorie, String libelle, List<ArticleVendu> categorieArticle) {
-		super();
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 		this.categorieArticle = categorieArticle;
+	}
+	
+	public Categorie(int noCategorie, String libelle) {
+		this.noCategorie = noCategorie;
+		this.libelle = libelle;
+	}
+
+
+	public Categorie(String libelle) {
+		this.libelle = libelle;
 	}
 
 

@@ -7,13 +7,14 @@
 		<jsp:param name="title" value="Login"/>
 	</jsp:include>
 </head>
+
 <body>
 	<jsp:include page="../parts/menuNavbar.jsp">
 		<jsp:param name="monCul" value=" "/>
     </jsp:include>
     
 <div class="d-flex justify-content-center align-items-center pt-5"> 
-	<form>
+	<form method="POST">
 	  <div class="form-group row">
 	    <label for="inputEmail3" class="col-sm-4 col-form-label">Identifiant :</label>
 	    <div class="col-sm-8">
@@ -24,7 +25,7 @@
 	    <label for="inputPassword3" class="col-sm-4 col-form-label">Mot de passe :</label>
 	    <div class="col-sm-8">
 	      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-	    </div>
+	   </div>
 	  </div>
 	 <div class="d-flex justify-content-center align-items-center">
 		  <div class="form-group row ">
