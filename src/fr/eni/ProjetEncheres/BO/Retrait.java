@@ -2,6 +2,11 @@ package fr.eni.ProjetEncheres.BO;
 
 public class Retrait {
 	
+	@Override
+	public String toString() {
+		return "Retrait [rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville + "]";
+	}
+
 	private String rue;
 	private int code_postal;
 	private String ville;

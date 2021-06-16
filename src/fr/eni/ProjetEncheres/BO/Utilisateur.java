@@ -48,7 +48,7 @@ public class Utilisateur {
 	}
 	//Constructeur pour la methode 'creerUnNouvequCompte()'
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, int credit, Boolean administrateur) 
+			String rue, String codePostal, String ville, String motDePasse, int credit) 
 	{
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -60,10 +60,36 @@ public class Utilisateur {
 		this.ville = ville;
 		this.motDePasse = motDePasse;
 		this.credit = credit;
-		this.administrateur = administrateur;
+		
 		
 	}
 	
+
+	//Constructeur pour la methode verification...
+	public Utilisateur(String string,int pseudoOuEmail) 
+	{
+		// Si pseudoOuEmail = 0 le String est un pseudo 
+			if (pseudoOuEmail==0)
+				{
+					this.pseudo=string;	
+				}
+		// Si pseudoOuEmail = 1 le String est un email 
+
+			else if (pseudoOuEmail==1) 
+				{
+					this.email=string;
+				}
+	}
+
+
+	@Override
+	public String toString() {
+		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
+				+ ", administrateur=" + administrateur + ", vend=" + vend + ", achete=" + achete + ", encherit="
+				+ encherit + "]";
+	}
 
 
 	/*********************Getters Setters***********************/

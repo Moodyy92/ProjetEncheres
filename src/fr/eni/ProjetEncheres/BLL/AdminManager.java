@@ -1,5 +1,7 @@
 package fr.eni.ProjetEncheres.BLL;
 
+import fr.eni.ProjetEncheres.DAL.DAOFactory;
+
 public class AdminManager {
 	DAO<Category> categoryDAO;
 	DAO<User> userDAO;

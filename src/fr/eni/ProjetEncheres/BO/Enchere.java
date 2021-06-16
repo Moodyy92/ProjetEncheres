@@ -4,6 +4,11 @@ import java.time.LocalDate;
 
 public class Enchere {
 	
+	@Override
+	public String toString() {
+		return "Enchere [dateEnchere=" + dateEnchere + ", montant_enchere=" + montant_enchere + "]";
+	}
+
 	private LocalDate dateEnchere;
 	private int montant_enchere;
 	
