@@ -8,23 +8,19 @@ public class UtilisateurManager {
 		private UtilisateurDAO UtilisateurDAO;
 		
 	public UtilisateurManager() {
-		ArticleVenduDAO = DAOFactory.getArticleVendu();
+		//ArticleVenduDAO = DAOFactory.getArticleVendu();
 		UtilisateurDAO = DAOFactory.getUtilisateur();
 	}
 	
 	
-	public void creerCompte(int noUtilisateur,String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, int credit)
+	public void creerCompte(Utilisateur user) throws BusinessException
 	{
-		Utilisateur user = new Utilisateur( pseudo,  nom,  prenom,  email,  telephone,
-				 rue,  codePostal,  ville,  motDePasse,  credit);
-		user.setNoUtilisateur(noUtilisateur);
 		
 		this.UtilisateurDAO.creerCompteUtilisateur(user);
 	}
 	
 	public void connection(String pseudo, String password) {
-		//création session si les params correspondent dans la table Utilisateurs
+		//crï¿½ation session si les params correspondent dans la table Utilisateurs
 	}
 	
 	public void deconnection() {
@@ -38,7 +34,7 @@ public class UtilisateurManager {
 	
 	public void profilModify(String pseudo, String firstname, String lastname, String email, 
 			String telephone, String street, String postalCode, String city) {
-		//Comparer les entrées du formulaire aux infos dans la table Utilisateurs et UPDATE si elles sont différentes
+		//Comparer les entrï¿½es du formulaire aux infos dans la table Utilisateurs et UPDATE si elles sont diffï¿½rentes
 	}
 	
 	

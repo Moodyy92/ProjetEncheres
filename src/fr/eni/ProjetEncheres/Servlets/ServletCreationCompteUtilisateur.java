@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.ProjetEncheres.BLL.BusinessException;
+import fr.eni.ProjetEncheres.BLL.UtilisateurManager;
 import fr.eni.ProjetEncheres.BO.Utilisateur;
+import fr.eni.ProjetEncheres.DAL.UtilisateurDAO;
 
 /**
  * Servlet implementation class ServletCreationCompteUtilisateur
@@ -44,10 +47,39 @@ public class ServletCreationCompteUtilisateur extends HttpServlet {
 				String rue, String codePostal, String ville, String motDePasse, int credit );*/
 		
 		
-		String pseudo;
-		pseudo = request.getParameter("pseudo");
-		System.out.println(pseudo);
+		String pseudo = request.getParameter("pseudo");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
+		String telephone = request.getParameter("telephone");
+		String rue = request.getParameter("rue");
+		String cp = request.getParameter("cp");
+		String ville = request.getParameter("ville");
+		String mdp = request.getParameter("mdp");
+		String confirmation = request.getParameter("confirmation");
+		int credit = 0;
+		Utilisateur user = new Utilisateur(pseudo,nom,prenom,email,telephone,rue,cp,ville,mdp,credit);
+		
+		/*if (confirmation==mdp) 
+		{*/
+			UtilisateurManager userDAO = new UtilisateurManager(); 
+			try {
+				userDAO.creerCompte(user);
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(user.toString());
+		//}
+			
+		/*else 
+		{
+			// erreur mdp et confirmation different
+		}*/
+		
+		
 		
 	}
-
 }
+
+

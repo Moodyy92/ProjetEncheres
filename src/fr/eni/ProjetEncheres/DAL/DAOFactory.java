@@ -1,19 +1,15 @@
 package fr.eni.ProjetEncheres.DAL;
 
-import fr.eni.ProjetEncheres.BO.ArticleVendu;
-
 public class DAOFactory {
 	
-	public static ArticleVenduDAO getArticleVendu() {
+	/*public static ArticleVenduDAO getArticleVendu() {
 		// TODO Auto-generated method stub
-		return new ProjetEncheresJdbcImpl();
-	}
+		return new UtilisateurJdbcImpl();
+	}*/
 
 	public static UtilisateurDAO getUtilisateur() {
-		// TODO Auto-generated method stub
-		return new ProjetEncheresJdbcImpl();
-	}
+		return new UtilisateurJdbcImpl();
 
-	
 
 }
+	}
