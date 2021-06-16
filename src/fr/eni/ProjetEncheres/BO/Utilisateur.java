@@ -65,6 +65,22 @@ public class Utilisateur {
 	}
 	
 
+	//Constructeur pour la methode verification...
+	public Utilisateur(String string,int pseudoOuEmail) 
+	{
+		// Si pseudoOuEmail = 0 le String est un pseudo 
+			if (pseudoOuEmail==0)
+				{
+					this.pseudo=string;	
+				}
+		// Si pseudoOuEmail = 1 le String est un email 
+
+			else if (pseudoOuEmail==1) 
+				{
+					this.email=string;
+				}
+	}
+
 
 	@Override
 	public String toString() {

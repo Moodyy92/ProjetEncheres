@@ -8,6 +8,7 @@ public interface UtilisateurDAO {
 
 	void creerCompteUtilisateur(Utilisateur user) throws BusinessException;
 	public boolean isConnected(String pseudo, String password);
+	boolean verification(String string, int pseudoOuEmail);
 }
 
 

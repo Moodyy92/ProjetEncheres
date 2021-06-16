@@ -1,6 +1,7 @@
 package fr.eni.ProjetEncheres.Servlets;
 
 import java.io.IOException;
+import java.util.regex.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.mysql.cj.util.StringUtils;
 
 import fr.eni.ProjetEncheres.BLL.BusinessException;
 import fr.eni.ProjetEncheres.BLL.UtilisateurManager;
@@ -22,14 +25,13 @@ import fr.eni.ProjetEncheres.DAL.UtilisateurDAO;
 @WebServlet("/ServletCreationCompteUtilisateur")
 public class ServletCreationCompteUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	public static final String VUE          = "/WEB-INF/inscription.jsp";
-    public static final String CHAMP_EMAIL  = "email";
-    public static final String CHAMP_PASS   = "motdepasse";
-    public static final String CHAMP_CONF   = "confirmation";
-    public static final String CHAMP_NOM    = "nom";
-    public static final String ATT_ERREURS  = "erreurs";
-    public static final String ATT_RESULTAT = "resultat";
+	
+	private final static String ERREUR_MDP = "Mot de passe different de la confirmation";
+	private final static String ERREUR_PSEUDO = "Le pseudo ne doit contenir que des alphanumeriques";
+	private final static String ERREUR_PSEUDO_EXISTANT = "Le pseudo existe deja";
+	private final static String ERREUR_EMAIL_EXISTANT = "L'email existe deja";
+
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,7 +46,7 @@ public class ServletCreationCompteUtilisateur extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		/*************************Redirection vers la JSP********************************/
-		RequestDispatcher rd = request.getRequestDispatcher("/creationDeCompteUtilisateur.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/utilisateur/register.jsp");
 		rd.forward(request, response);
 	}
 
@@ -55,8 +57,7 @@ public class ServletCreationCompteUtilisateur extends HttpServlet {
 		
 		
 		
-				String resultat;
-		        Map<String, String> erreurs = new HashMap<String, String>();
+			
 		/****************************Recuperation des Parametres des champs************************************/
 				
 		        String pseudo = request.getParameter("pseudo");
@@ -69,85 +70,106 @@ public class ServletCreationCompteUtilisateur extends HttpServlet {
 				String ville = request.getParameter("ville");
 				String mdp = request.getParameter("mdp");
 				String confirmation = request.getParameter("confirmation");
-				System.out.println(confirmation);
 				int credit = 0;
 				
 		/****************************Creation de l'utilisateur************************************/
 
-				Utilisateur user = new Utilisateur(pseudo,nom,prenom,email,telephone,rue,cp,ville,mdp,credit);
+				// Verification motdepasse = confirmation du motdepasse
+				if (mdp.equals(confirmation) && confirmation!=null) 
+				{
+					
+					//Verification si pseudo est alphanumerique
+					if (isAlphanumeric(pseudo)&& pseudo!=null) {
+									int pseudoOuEmail =0;
+									
+								if (verifier(pseudo,pseudoOuEmail) ) 
+								{	
+											pseudoOuEmail =1;
+											if (verifier(email,pseudoOuEmail)&&email!=null) {
+												
+											
+									        	Utilisateur user = new Utilisateur(pseudo,nom,prenom,email,telephone,rue,cp,ville,mdp,credit);
+									        /* Initialisation du résultat global de la validation. */
+									      
+										try 
+										{
+											UtilisateurManager userDAO = new UtilisateurManager(); 
+											userDAO.creerCompte(user);
+											
+											RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+											rd.forward(request, response);
+											
+										} catch (BusinessException e)
+										{
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
 				
-
-		        /* Validation du champ email. */
-		        try {
-		            validationEmail( email );
-		        } catch ( Exception e ) {
-		            erreurs.put( CHAMP_EMAIL, e.getMessage() );
-		        }
-
-		        /* Validation des champs mot de passe et confirmation. */
-		        try {
-		            validationMotsDePasse( mdp, confirmation );
-		        } catch ( Exception e ) {
-		            erreurs.put( CHAMP_PASS, e.getMessage() );
-		        }
-
-		        /* Validation du champ nom. */
-		        try {
-		            validationNom( nom );
-		        } catch ( Exception e ) {
-		            erreurs.put( CHAMP_NOM, e.getMessage() );
-		        }
-
-		        /* Initialisation du résultat global de la validation. */
-		        if ( erreurs.isEmpty() ) {
-		            resultat = "Succès de l'inscription.";
-		        } else {
-		            resultat = "Échec de l'inscription.";
-		        }
-				
-			try 
-			{
-				UtilisateurManager userDAO = new UtilisateurManager(); 
-				userDAO.creerCompte(user);
-				
-		/*********************Redirection vers l'accueille si userDAO.creerCompte(user) n'est pas catch***************/
-				
-				//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Acceuille.jsp");
-				//rd.forward(request, response);
-				
-			} catch (BusinessException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+										}else 
+										{
+											request.setAttribute("erreur", ERREUR_EMAIL_EXISTANT);
+											RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/utilisateur/register.jsp");
+											rd.forward(request, response); 
+											
+										}
+							
+						}else 
+						{
+							request.setAttribute("erreur", ERREUR_PSEUDO_EXISTANT);
+							RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/utilisateur/register.jsp");
+							rd.forward(request, response); 
+						}
+						
+						
+						
+					}else {
+						request.setAttribute("erreur", ERREUR_PSEUDO);
+						RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/utilisateur/register.jsp");
+						rd.forward(request, response); 
+							}
+					
+			}else 
 			
-			System.out.println(user.toString());
+			{
+				request.setAttribute("erreur", ERREUR_MDP);
+							RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/utilisateur/register.jsp");
+							rd.forward(request, response); 
+				
+			}
+				
+			
+			
 		
 		
 		
 		
 	}
+		
 
-	private void validationNom(String nom) throws Exception 
-	{
-		if ( nom != null && nom.trim().length() < 3 ) {
-	        throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
-			}
-	}
-	private void validationMotsDePasse(String mdp, String confirmation) throws Exception 
-	{
-		if ( mdp != confirmation ) {
-	        throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
-			}
-		if ( mdp != null && mdp.trim().length() < 8 ) {
-	        throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
-			}
-	} 
+	
 
-	private void validationEmail(String email) {
-		// TODO Auto-generated method stub
 		
+
+			public boolean isAlphanumeric(String str)
+			{
+			    char[] charArray = str.toCharArray();
+			    for(char c:charArray)
+				    {
+				        if (!Character.isLetterOrDigit(c))
+				            return false;
+				    }
+			    return true;
+			}
+	
+		private boolean verifier(String string, int pseudoOuEmail) {
+			
+			boolean Existant=false;
+			UtilisateurManager user = new UtilisateurManager();
+			Existant = user.verification(string,pseudoOuEmail);
+			
+			return Existant;
 	}
+			
 }
 
 

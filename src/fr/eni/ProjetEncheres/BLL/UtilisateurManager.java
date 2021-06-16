@@ -36,6 +36,16 @@ public class UtilisateurManager {
 			String telephone, String street, String postalCode, String city) {
 		//Comparer les entr�es du formulaire aux infos dans la table Utilisateurs et UPDATE si elles sont diff�rentes
 	}
+
+
+	
+
+
+	public boolean verification(String string, int pseudoOuEmail) {
+		boolean test = true;
+		test=this.UtilisateurDAO.verification(string,pseudoOuEmail);
+		return test;
+	}
 	
 	
 }
